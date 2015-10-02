@@ -2,9 +2,10 @@
   "repository": "git@github.com:ericlifka/js-transpile.git",
   "license": "MIT",
   "scripts": {
-    "test": "mocha tests"
+    "test": "mocha tests --compilers js:babel/register"
   },
   "devDependencies": {
+    "babel": "^5.8.23",
     "mocha": "^2.3.3"
   }
 }
