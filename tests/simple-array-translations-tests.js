@@ -1,9 +1,9 @@
-var assert = require("assert");
+import should from 'should';
+
 describe('Array', () => {
   describe('#indexOf()', () => {
     it('should return -1 when the value is not present', function () {
-      assert.equal(-1, [1,2,3].indexOf(5));
-      assert.equal(-1, [1,2,3].indexOf(0));
+      (5).should.be.exactly(5).and.be.a.Number();
     });
   });
 });
