@@ -1,3 +1,3 @@
-exports.toJavascript = function (arr) {
-
+export const toJsString = function (arr) {
+  return "";
 };

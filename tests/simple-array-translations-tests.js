@@ -1,9 +1,10 @@
 import should from 'should';
+import {toJsString} from '../simple-array-translations';
 
-describe('Array', () => {
-  describe('#indexOf()', () => {
-    it('should return -1 when the value is not present', function () {
-      (5).should.be.exactly(5).and.be.a.Number();
+describe('simple-array-translations', () => {
+  describe('#toJsString()', () => {
+    it('should return a string that represents javascript code', function () {
+      toJsString().should.be.a.String();
     });
   });
 });
