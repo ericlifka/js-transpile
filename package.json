@@ -1,6 +1,9 @@
 {
   "repository": "git@github.com:ericlifka/js-transpile.git",
   "license": "MIT",
+  "scripts": {
+    "test": "mocha tests"
+  },
   "devDependencies": {
     "mocha": "^2.3.3"
   }
