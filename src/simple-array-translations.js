@@ -1,3 +1,5 @@
+import { isArray } from './utils';
+
 function letToVar(arr) {
   return `var ${arr[1]} = ${arr[2]};`;
 }
@@ -7,7 +9,7 @@ function addition(arr) {
 }
 
 export const toJsString = function (arr) {
-  if (typeof arr !== 'object' || typeof arr.length !== 'number') {
+  if (!isArray(arr)) {
     return "";
   }
 
