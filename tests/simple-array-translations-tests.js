@@ -1,5 +1,5 @@
 import should from 'should';
-import {toJsString} from '../simple-array-translations';
+import {toJsString} from '../src/simple-array-translations';
 
 describe('simple-array-translations', () => {
   describe('#toJsString()', () => {
