@@ -5,3 +5,5 @@ export const isArray = arr =>
 export const isWhitespaceChar = char =>
   /\s/.test(char);
 
+export const isSymbolChar = char =>
+  /[A-Za-z0-9_\-\$]/.test(char);
