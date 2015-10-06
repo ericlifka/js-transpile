@@ -11,7 +11,16 @@ function _parse_list(state) {
 }
 
 function _parse_string(state) {
+  const token = state.input[state.position];
+  state.position++;
+  let str = "";
 
+  while (state.input[state.position] !== token) {
+    str += state.input[state.position];
+    state.position++;
+  }
+
+  return token + str + token;
 }
 
 function _parse_symbol(state) {
