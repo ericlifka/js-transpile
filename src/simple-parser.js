@@ -1,4 +1,5 @@
-import { isWhitespaceChar } from './utils';
+import { isWhitespaceChar, isSymbolChar } from './utils';
+
 
 function _parse_list(state) {
   state.position++; // (
@@ -24,7 +25,12 @@ function _parse_string(state) {
 }
 
 function _parse_symbol(state) {
-
+  let symbol = "";
+  while (isSymbolChar(state.input[state.position])) {
+    symbol += state.input[state.position];
+    state.position++;
+  }
+  return symbol;
 }
 
 function _parse(state) {
