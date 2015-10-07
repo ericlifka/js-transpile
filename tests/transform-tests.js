@@ -1,7 +1,7 @@
 import should from 'should';
-import transform from '../src/transform';
+import { transformString } from '../src/transform';
 
 describe('transform', () => {
   it('should turn a string into a string', () =>
-    transform("()").should.be.a.String());
+    transformString("()").should.be.a.String());
 });
