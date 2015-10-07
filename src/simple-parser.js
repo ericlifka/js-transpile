@@ -13,7 +13,7 @@ function _parse_list(state) {
 
 function _parse_string(state) {
   const token = state.input[state.position];
-  state.position++;
+  state.position++; // move past opening token
   let str = "";
 
   while (state.input[state.position] !== token) {
@@ -21,6 +21,7 @@ function _parse_string(state) {
     state.position++;
   }
 
+  state.position++; // move past closing token
   return token + str + token;
 }
 
@@ -50,7 +51,7 @@ function _parse(state) {
   return _parse_symbol(state);
 }
 
-export function parse(input) {
+export function parse(input = "()") {
   return _parse({
     input,
     position: 0
