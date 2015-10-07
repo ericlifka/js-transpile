@@ -1,18 +1,20 @@
 import should from 'should';
 import { transformString } from '../src/transform';
 
+function test(input, output) {
+  it(input, () => should(transformString(input)).equal(output));
+}
+
 describe('transform', () => {
-  it('should turn a string into a string', () =>
-    transformString("()").should.be.a.String());
+  it('should turn a string into a string',
+    () => transformString("()").should.be.a.String());
 
   describe('variables', () => {
-    it('(let a 2)', () =>
-      transformString("(let a 2)").should.equal("var a = 2;"));
+    test('(let a 2)', 'var a = 2;');
   });
 
   describe('math', () => {
-    it('(+ 1 2)', () =>
-      transformString('(+ 1 2)').should.equal("(1 + 2)"));
+    test('(+ 1 2)', '(1 + 2)');
   });
 
 });
