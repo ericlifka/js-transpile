@@ -5,7 +5,7 @@ function letToVar(arr) {
 }
 
 function addition(arr) {
-  return `${arr[1]} + ${arr[2]};`;
+  return `(${arr[1]} + ${arr[2]})`;
 }
 
 export const toJsString = function (arr) {

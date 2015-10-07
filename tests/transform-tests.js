@@ -12,7 +12,7 @@ describe('transform', () => {
 
   describe('math', () => {
     it('(+ 1 2)', () =>
-      transformString('(+ 1 2)').should.equal("1 + 2"));
+      transformString('(+ 1 2)').should.equal("(1 + 2)"));
   });
 
 });
