@@ -23,8 +23,17 @@ function letToVar(cmd, ...vars) {
   }
 }
 
-function addition(arr) {
-  return `(${arr[1]} + ${arr[2]})`;
+function math_operator(operator, ...params) {
+  const separator = ` ${operator} `;
+  const statements = [];
+  for (let i = 0; i < params.length; i++) {
+    let statement = params[i];
+    if (isArray(statement)) {
+      statement = toJsString(statement);
+    }
+    statements.push(statement);
+  }
+  return `(${statements.join(separator)})`;
 }
 
 export const toJsString = function (arr) {
@@ -34,7 +43,10 @@ export const toJsString = function (arr) {
 
   switch(arr[0]) {
     case 'let': return letToVar(...arr);
-    case '+': return addition(arr);
+    case '+': return math_operator(...arr);
+    case '-': return math_operator(...arr);
+    case '*': return math_operator(...arr);
+    case '/': return math_operator(...arr);
   }
 
   return "";
