@@ -9,7 +9,7 @@ describe('transform', () => {
   it('should turn a string into a string',
     () => transformString("()").should.be.a.String());
 
-  describe('variables', () => {
+  describe.only('variables', () => {
     test('(let a 2)', 'var a = 2;');
     test('(let a 2 b 4 c 5)', 'var a = 2, b = 4, c = 5;');
     test('(let a (+ 1 2))', 'var a = (1 + 2);');

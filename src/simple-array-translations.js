@@ -1,7 +1,22 @@
 import { isArray } from './utils';
 
-function letToVar(arr) {
-  return `var ${arr[1]} = ${arr[2]};`;
+function letToVar(cmd, ...vars) {
+  const varPairs = [];
+  for (let i = 0; i < vars.length; i += 2) {
+    let name = vars[i];
+    let val = vars[i+1];
+    if (name && val) {
+      let statement = `${name} = ${val}`;
+      varPairs.push(statement);
+    }
+  }
+
+  if (varPairs.length < 1) {
+    return '';
+  }
+  else {
+    return `var ${varPairs.join(', ')};`;
+  }
 }
 
 function addition(arr) {
@@ -14,7 +29,7 @@ export const toJsString = function (arr) {
   }
 
   switch(arr[0]) {
-    case 'let': return letToVar(arr);
+    case 'let': return letToVar(...arr);
     case '+': return addition(arr);
   }
 
