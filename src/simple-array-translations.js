@@ -6,6 +6,10 @@ function letToVar(cmd, ...vars) {
     let name = vars[i];
     let val = vars[i+1];
     if (name && val) {
+      if (isArray(val)) {
+        val = toJsString(val);
+      }
+
       let statement = `${name} = ${val}`;
       varPairs.push(statement);
     }
