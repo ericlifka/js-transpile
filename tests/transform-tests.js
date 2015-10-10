@@ -28,4 +28,20 @@ describe('transform', () => {
     test('(math.pow (* 2 3) (- 2 4))', 'Math.pow((2 * 3), (2 - 4))');
   });
 
+  describe('control flow', () => {
+    describe('if else', () => {});
+    describe('for loops', () => {});
+    describe('while loops', () => {});
+  });
+
+  describe('functions', () => {});
+
+  describe('data structures', () => {
+    describe('arrays', () => {});
+    describe('objects', () => {});
+  });
+
+  describe('modules', () => {});
+
+  describe('calling methods on dynamic entities', () => {});
 });
