@@ -36,12 +36,23 @@ function math_operator(operator, ...params) {
   return `(${statements.join(separator)})`;
 }
 
+function define_function(operator, name, params, ...body) {
+  if (isArray(name)) {
+    body.unshift(params);
+    params = name;
+    name = "";
+  }
+
+
+}
+
 export const toJsString = function (arr) {
   if (!isArray(arr)) {
     return "";
   }
 
   switch(arr[0]) {
+    case 'function': return define_function(...arg);
     case 'let': return letToVar(...arr);
     case '+': return math_operator(...arr);
     case '-': return math_operator(...arr);
