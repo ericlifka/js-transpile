@@ -52,7 +52,7 @@ function define_function(operator, name, params, ...body) {
 
 export const toJsString = function (arr) {
   if (!isArray(arr)) {
-    return "";
+    return arr;
   }
 
   switch(arr[0]) {
