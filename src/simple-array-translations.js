@@ -43,7 +43,11 @@ function define_function(operator, name, params, ...body) {
     name = "";
   }
 
+  let statements = body.map(statement => toJsString(statement));
+  let final = statements.pop();
+  statements.push('');
 
+  return `(function ${name}(${params.join(' ')}) {${statements.join('; ')} return ${final};})`;
 }
 
 export const toJsString = function (arr) {
@@ -52,7 +56,7 @@ export const toJsString = function (arr) {
   }
 
   switch(arr[0]) {
-    case 'function': return define_function(...arg);
+    case 'function': return define_function(...arr);
     case 'let': return letToVar(...arr);
     case '+': return math_operator(...arr);
     case '-': return math_operator(...arr);
