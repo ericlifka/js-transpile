@@ -4,11 +4,11 @@ import { isSymbolChar, isWhitespaceChar, isArray } from '../src/utils';
 describe("utils", () => {
   describe("#isSymbolChar", () => {
     it('should accept symbol characters', () => {
-      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_$".split('').forEach(char =>
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_$.".split('').forEach(char =>
         isSymbolChar(char).should.equal(true));
     });
     it('should reject non-symbol characters', () => {
-      "!@#%^&()[]{}\\|?.,<>".split('').forEach(char =>
+      "!@#%^&()[]{}\\|?,<>".split('').forEach(char =>
         isSymbolChar(char).should.equal(false));
     });
   });
