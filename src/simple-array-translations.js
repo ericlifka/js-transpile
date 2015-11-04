@@ -50,6 +50,12 @@ function define_function(operator, name, params, ...body) {
   return `(function ${name}(${params.join(' ')}) {${statements.join('; ')} return ${final};})`;
 }
 
+function function_call(fn, ...params) {
+  const evaluated_params = params.map(p => toJsString(p));
+
+  return `${fn}( ${evaluated_params.join(', ')} )`;
+}
+
 export const toJsString = function (arr) {
   if (!isArray(arr)) {
     return arr;
@@ -64,5 +70,5 @@ export const toJsString = function (arr) {
     case '/': return math_operator(...arr);
   }
 
-  return "";
+  return function_call(...arr);
 };
