@@ -3,8 +3,8 @@ import { isArray } from './utils';
 function letToVar(cmd, ...vars) {
   const varPairs = [];
   for (let i = 0; i < vars.length; i += 2) {
-    let name = vars[i];
-    let val = vars[i+1];
+    let name = vars[ i ];
+    let val = vars[ i + 1 ];
     if (name && val) {
       if (isArray(val)) {
         val = toJsString(val);
@@ -27,7 +27,7 @@ function math_operator(operator, ...params) {
   const separator = ` ${operator} `;
   const statements = [];
   for (let i = 0; i < params.length; i++) {
-    let statement = params[i];
+    let statement = params[ i ];
     if (isArray(statement)) {
       statement = toJsString(statement);
     }

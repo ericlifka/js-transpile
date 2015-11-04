@@ -29,12 +29,12 @@ describe("utils", () => {
   describe("#isArray", () => {
     it('should accept arrays', () => {
       isArray([]).should.equal(true);
-      isArray([1, 2, 3]).should.equal(true);
+      isArray([ 1, 2, 3 ]).should.equal(true);
     });
     it('should reject other types', () => {
       isArray(5).should.equal(false);
       isArray('a').should.equal(false);
-      isArray({a: 1}).should.equal(false);
+      isArray({ a: 1 }).should.equal(false);
     });
   });
 });
