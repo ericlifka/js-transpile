@@ -50,6 +50,10 @@ function define_function(operator, name, params, ...body) {
   return `(function ${name}(${params.join(' ')}) {${statements.join('; ')} return ${final};})`;
 }
 
+function define_module() {
+
+}
+
 function function_call(fn, ...params) {
   const evaluated_params = params.map(p => toJsString(p));
 
@@ -63,6 +67,7 @@ export const toJsString = function (arr) {
 
   switch(arr[0]) {
     case 'function': return define_function(...arr);
+    case 'module': return define_module(...arr);
     case 'let': return letToVar(...arr);
     case '+': return math_operator(...arr);
     case '-': return math_operator(...arr);
