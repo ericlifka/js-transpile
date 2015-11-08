@@ -59,6 +59,19 @@ describe('transform', () => {
         (+ 1 2))
       `,
       `module('test-em', function () {(1 + 2);});`);
+    test(`
+      (module test-em
+        (export var-a (+ 1 2)))
+      `,
+      `module('test-em', function (export) {export('var-a', (1 + 2));});`);
+    test(`
+      (module test-em-a
+        (require test-em-b (var-a)))
+      `,
+      `module('test-em-a', function (require) {
+         var testEmB = require('test-em-b');
+         var varA = testEmB['var-a'];
+       });`);
   });
 
   describe('calling methods on dynamic entities', () => {});
