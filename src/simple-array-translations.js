@@ -43,7 +43,7 @@ function define_function(operator, name, params, ...body) {
     name = "";
   }
 
-  let statements = body.map(statement => toJsString(statement));
+  let statements = body.map(toJsString);
   let final = statements.pop();
   statements.push('');
 
@@ -51,7 +51,7 @@ function define_function(operator, name, params, ...body) {
 }
 
 function define_module(operator, name, ...body) {
-  const statements = body.map(statement => toJsString(statement));
+  const statements = body.map(toJsString);
   statements.push('');
 
   return `module('${name}', function (require, export) {${statements.join('; ')}})`;
