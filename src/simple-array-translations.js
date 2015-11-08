@@ -51,10 +51,12 @@ function define_function(operator, name, params, ...body) {
 }
 
 function define_module(operator, name, ...body) {
-  const statements = body.map(toJsString);
-  statements.push('');
+  const statements = body
+    .map(toJsString)
+    .map(s => s + ";")
+    .join(' ');
 
-  return `module('${name}', function (require, export) {${statements.join('; ')}})`;
+  return `module('${name}', function (require, export) {${statements}})`;
 }
 
 function function_call(fn, ...params) {

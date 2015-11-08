@@ -58,7 +58,7 @@ describe('transform', () => {
       (module test-em
         (+ 1 2))
       `,
-      `module('test-em', function (require, export) {(1 + 2); })`);
+      `module('test-em', function (require, export) {(1 + 2);})`);
     test(`
       (module test-em
         (export var-a (+ 1 2)))
