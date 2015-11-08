@@ -9,7 +9,11 @@ export const isSymbolChar = char =>
   /[A-Za-z0-9_\-\$+\/*\.]/.test(char);
 
 
+const capitalize = str =>
+  str.charAt(0).toUpperCase() +
+  str.slice(1);
+
 export const camelCase = str => {
   const [ first, ...rest ] = str.split('-');
-  return first + rest.map(s => s.charAt(0).toUpperCase() + s.slice(1)).join('');
+  return first + rest.map(capitalize).join('');
 };
