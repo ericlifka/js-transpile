@@ -62,6 +62,14 @@ function define_module(operator, name, ...body) {
   return `module('${name}', function (require, export) {${statements}})`;
 }
 
+function module_require() {
+  return "";
+}
+
+function module_export() {
+  return "";
+}
+
 function function_call(fn, ...params) {
   const evaluated_params = params.map(p => toJsString(p));
 
@@ -76,6 +84,8 @@ export const toJsString = function (arr) {
   switch(arr[0]) {
     case 'function': return define_function(...arr);
     case 'module': return define_module(...arr);
+    case 'require': return module_require(...arr);
+    case 'export': return module_export(...arr);
     case 'let': return letToVar(...arr);
     case '+': return math_operator(...arr);
     case '-': return math_operator(...arr);
