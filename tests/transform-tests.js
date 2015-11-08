@@ -58,17 +58,17 @@ describe('transform', () => {
       (module test-em
         (+ 1 2))
       `,
-      `module('test-em', function () {(1 + 2);});`);
+      `module('test-em', function (require, export) {(1 + 2);});`);
     test(`
       (module test-em
         (export var-a (+ 1 2)))
       `,
-      `module('test-em', function (export) {export('var-a', (1 + 2));});`);
+      `module('test-em', function (require, export) {export('var-a', (1 + 2));});`);
     test(`
       (module test-em-a
         (require test-em-b (var-a)))
       `,
-      `module('test-em-a', function (require) {
+      `module('test-em-a', function (require, export) {
          var testEmB = require('test-em-b');
          var varA = testEmB['var-a'];
        });`);
