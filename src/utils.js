@@ -10,6 +10,6 @@ export const isSymbolChar = char =>
 
 
 export const camelCase = str => {
-  const [ first, rest ] = str.split('-');
+  const [ first, ...rest ] = str.split('-');
   return first + rest.map(s => s.charAt(0).toUpperCase() + s.slice(1)).join('');
 };

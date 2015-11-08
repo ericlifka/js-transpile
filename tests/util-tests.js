@@ -38,7 +38,7 @@ describe("utils", () => {
     });
   });
 
-  describe.only("#camelCase", () => {
+  describe("#camelCase", () => {
     it('should convert dasherized strings to camel case strings', () => {
       camelCase('').should.equal('');
       camelCase('a').should.equal('a');
