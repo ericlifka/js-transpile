@@ -7,3 +7,9 @@ export const isWhitespaceChar = char =>
 
 export const isSymbolChar = char =>
   /[A-Za-z0-9_\-\$+\/*\.]/.test(char);
+
+
+export const camelCase = str => {
+  const [ first, rest ] = str.split('-');
+  return first + rest.map(s => s.charAt(0).toUpperCase() + s.slice(1)).join('');
+};
