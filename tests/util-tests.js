@@ -1,5 +1,5 @@
 import should from 'should';
-import { isSymbolChar, isWhitespaceChar, isArray } from '../src/utils';
+import { isSymbolChar, isWhitespaceChar, isArray, camelCase } from '../src/utils';
 
 describe("utils", () => {
   describe("#isSymbolChar", () => {
@@ -35,6 +35,18 @@ describe("utils", () => {
       isArray(5).should.equal(false);
       isArray('a').should.equal(false);
       isArray({ a: 1 }).should.equal(false);
+    });
+  });
+
+  describe.only("#camelCase", () => {
+    it('should convert dasherized strings to camel case strings', () => {
+      camelCase('').should.equal('');
+      camelCase('a').should.equal('a');
+      camelCase('abc').should.equal('abc');
+      camelCase('a-b').should.equal('aB');
+      camelCase('a-b-c').should.equal('aBC');
+      camelCase('thing-one').should.equal('thingOne');
+      camelCase('one-two-three').should.equal('oneTwoThree');
     });
   });
 });
