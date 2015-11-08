@@ -37,8 +37,8 @@ describe('transform', () => {
   describe('function literals', () => {
     test('(function ())', '(function () { return undefined;})');
     test('(function () 4)', '(function () { return 4;})');
-    test('(function (x y) (+ x y))', '(function (x y) { return (x + y);})');
-    test('(function adder (x y) (+ x y))', '(function adder(x y) { return (x + y);})');
+    test('(function (x y) (+ x y))', '(function (x, y) { return (x + y);})');
+    test('(function adder (x y) (+ x y))', '(function adder(x, y) { return (x + y);})');
     test('(function (x) (function (y) (+ x y)))', '(function (x) { return (function (y) { return (x + y);});})');
   });
 

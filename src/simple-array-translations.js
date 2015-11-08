@@ -45,9 +45,12 @@ function define_function(operator, name, params, ...body) {
 
   let statements = body.map(toJsString);
   let final = statements.pop();
-  statements.push('');
+  statements = statements
+    .map(s => s + ";")
+    .join(' ');
+  params = params.join(', ');
 
-  return `(function ${name}(${params.join(' ')}) {${statements.join('; ')} return ${final};})`;
+  return `(function ${name}(${params}) {${statements} return ${final};})`;
 }
 
 function define_module(operator, name, ...body) {
