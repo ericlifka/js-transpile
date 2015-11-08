@@ -1,4 +1,4 @@
-import { isArray } from './utils';
+import { isArray, camelCase } from './utils';
 
 function letToVar(cmd, ...vars) {
   const varPairs = [];
@@ -50,8 +50,11 @@ function define_function(operator, name, params, ...body) {
   return `(function ${name}(${params.join(' ')}) {${statements.join('; ')} return ${final};})`;
 }
 
-function define_module() {
-  return "";
+function define_module(operator, name, ...body) {
+  const statements = body.map(statement => toJsString(statement));
+  statements.push('');
+
+  return `module('${name}', function (require, export) {${statements.join('; ')}})`;
 }
 
 function function_call(fn, ...params) {
