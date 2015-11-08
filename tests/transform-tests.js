@@ -53,7 +53,13 @@ describe('transform', () => {
     describe('objects', () => {});
   });
 
-  describe('modules', () => {});
+  describe('modules', () => {
+    test(`
+      (module test-em
+        (+ 1 2))
+      `,
+      `module('test-em', function () {(1 + 2);});`);
+  });
 
   describe('calling methods on dynamic entities', () => {});
 });

@@ -51,7 +51,7 @@ function define_function(operator, name, params, ...body) {
 }
 
 function define_module() {
-
+  return "";
 }
 
 function function_call(fn, ...params) {
