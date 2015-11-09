@@ -55,35 +55,35 @@ describe('transform', () => {
 
   describe('modules', () => {
     test(`
-      (module test-em
+      (module testEm
         (+ 1 2))
       `,
-      `module('test-em', function (require, export) {(1 + 2);})`);
+      `module('testEm', function (require, export) {(1 + 2);})`);
     test(`
-      (module test-em
-        (export var-a (+ 1 2)))
+      (module testEm
+        (export varA (+ 1 2)))
       `,
-      `module('test-em', function (require, export) {export('var-a', (1 + 2));})`);
+      `module('testEm', function (require, export) {export('varA', (1 + 2));})`);
     test(`
-      (module test-em-a
-        (require test-em-b (var-a)))
+      (module testEmA
+        (require testEmB (var-a)))
       `,
-      `module('test-em-a', function (require, export) {
-         var testEmB = require('test-em-b');
-         var varA = testEmB['var-a'];
+      `module('testEmA', function (require, export) {
+         var testEmB = require('testEmB');
+         var varA = testEmB['varA'];
        })`);
     test(`
-      (module test-em-a
-        (require test-em-b
-          (var-a
-           var-b
-           var-c)))
+      (module testEmA
+        (require testEmB
+          (varA
+           varB
+           varC)))
       `,
-      `module('test-em-a', function (require, export) {
-         var testEmB = require('test-em-b');
-         var varA = testEmB['var-a'];
-         var varB = testEmB['var-b'];
-         var varC = testEmB['var-C'];
+      `module('testEmA', function (require, export) {
+         var testEmB = require('testEmB');
+         var varA = testEmB['varA'];
+         var varB = testEmB['varB'];
+         var varC = testEmB['varC'];
        })`);
   });
 
