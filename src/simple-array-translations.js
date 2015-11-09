@@ -63,7 +63,13 @@ function define_module(operator, name, ...body) {
 }
 
 function module_require(operator, moduleName, reqTokens) {
-  return "";
+  const statements = reqTokens.map(token =>
+    `var ${token} = ${moduleName}['${token}']`);
+  statements.unshift(`var ${moduleName} = require('${moduleName}')`);
+
+  return statements
+    .map(s => s + ';')
+    .join(' ');
 }
 
 function module_export(operator, moduleName, statement) {
