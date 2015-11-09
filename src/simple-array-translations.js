@@ -62,11 +62,11 @@ function define_module(operator, name, ...body) {
   return `module('${name}', function (require, export) {${statements}})`;
 }
 
-function module_require() {
+function module_require(operator, moduleName, reqTokens) {
   return "";
 }
 
-function module_export() {
+function module_export(operator, moduleName, statement) {
   return "";
 }
 
