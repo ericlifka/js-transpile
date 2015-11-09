@@ -67,7 +67,7 @@ function module_require(operator, moduleName, reqTokens) {
 }
 
 function module_export(operator, moduleName, statement) {
-  return "";
+  return `export('${moduleName}', ${toJsString(statement)})`;
 }
 
 function function_call(fn, ...params) {
