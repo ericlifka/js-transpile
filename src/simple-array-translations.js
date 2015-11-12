@@ -24,16 +24,13 @@ function letToVar(cmd, ...vars) {
 }
 
 function math_operator(operator, ...params) {
-  const separator = ` ${operator} `;
-  const statements = [];
-  for (let i = 0; i < params.length; i++) {
-    let statement = params[ i ];
-    if (isArray(statement)) {
-      statement = toJsString(statement);
-    }
-    statements.push(statement);
-  }
-  return `(${statements.join(separator)})`;
+  const statement = params.map(param =>
+    isArray(param) ?
+      toJsString(param) :
+      param
+  ).join(` ${operator} `);
+
+  return `(${statement})`;
 }
 
 function define_function(operator, name, params, ...body) {
