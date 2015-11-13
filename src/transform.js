@@ -1,4 +1,4 @@
 import { parse } from './simple-parser';
-import { toJsString } from './simple-array-translations';
+import { toJsTree } from './simple-array-translations';
 
-export const transformString = input => toJsString(parse(input));
+export const transformString = input => toJsTree(parse(input));

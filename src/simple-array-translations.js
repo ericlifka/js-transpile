@@ -7,7 +7,7 @@ function letToVar(cmd, ...vars) {
     let val = vars[ i + 1 ];
     if (name && val) {
       if (isArray(val)) {
-        val = toJsString(val);
+        val = toJsTree(val);
       }
 
       let statement = `${name} = ${val}`;
@@ -26,7 +26,7 @@ function letToVar(cmd, ...vars) {
 function math_operator(operator, ...params) {
   const statement = params.map(param =>
     isArray(param) ?
-      toJsString(param) :
+      toJsTree(param) :
       param
   ).join(` ${operator} `);
 
@@ -40,7 +40,7 @@ function define_function(operator, name, params, ...body) {
     name = "";
   }
 
-  let statements = body.map(toJsString);
+  let statements = body.map(toJsTree);
   let final = statements.pop();
   statements = statements
     .map(s => s + ";")
@@ -52,7 +52,7 @@ function define_function(operator, name, params, ...body) {
 
 function define_module(operator, name, ...body) {
   const statements = body
-    .map(toJsString)
+    .map(toJsTree)
     .map(s => s + ";")
     .join(' ');
 
@@ -70,16 +70,16 @@ function module_require(operator, moduleName, reqTokens) {
 }
 
 function module_export(operator, moduleName, statement) {
-  return `export('${moduleName}', ${toJsString(statement)})`;
+  return `export('${moduleName}', ${toJsTree(statement)})`;
 }
 
 function function_call(fn, ...params) {
-  const evaluated_params = params.map(p => toJsString(p));
+  const evaluated_params = params.map(p => toJsTree(p));
 
   return `${fn}( ${evaluated_params.join(', ')} )`;
 }
 
-export const toJsString = function (arr) {
+export const toJsTree = function (arr) {
   if (!isArray(arr)) {
     return arr;
   }

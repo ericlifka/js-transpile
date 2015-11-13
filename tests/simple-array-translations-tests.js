@@ -1,10 +1,10 @@
 import should from 'should';
-import { toJsString } from '../src/simple-array-translations';
+import { toJsTree } from '../src/simple-array-translations';
 
 describe('simple-array-translations', () => {
-  describe('#toJsString()', () => {
-    it('should handle a simple variable assignment', () => toJsString([ 'let', 'a', '5' ]).should.equal("var a = 5;"));
-    it('should handle a simple math statement', () => toJsString([ '+', '2', '3' ]).should.equal("(2 + 3)"));
-    it('should handle a math statement into an assignment', () => toJsString([ 'let', 'a', [ '+', '2', '3' ] ]).should.equal("var a = (2 + 3);"));
+  describe('#toJsTree()', () => {
+    it('should handle a simple variable assignment', () => toJsTree([ 'let', 'a', '5' ]).should.equal("var a = 5;"));
+    it('should handle a simple math statement', () => toJsTree([ '+', '2', '3' ]).should.equal("(2 + 3)"));
+    it('should handle a math statement into an assignment', () => toJsTree([ 'let', 'a', [ '+', '2', '3' ] ]).should.equal("var a = (2 + 3);"));
   });
 });
