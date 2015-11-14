@@ -7,7 +7,7 @@ function letToVar([cmd, ...vars], options) {
     let val = vars[ i + 1 ];
     if (name && val) {
       if (isArray(val)) {
-        val = toJsTree(val);
+        val = toJsTree(val, { embedded: true });
       }
 
       let statement = `${name} = ${val}`;
@@ -26,7 +26,7 @@ function letToVar([cmd, ...vars], options) {
 function math_operator([operator, ...params], options) {
   const statement = params.map(param =>
     isArray(param) ?
-      toJsTree(param) :
+      toJsTree(param, { embedded: true }) :
       param
   ).join(` ${operator} `);
 
@@ -70,11 +70,11 @@ function module_require([operator, moduleName, reqTokens], options) {
 }
 
 function module_export([operator, moduleName, statement], options) {
-  return `export('${moduleName}', ${toJsTree(statement)})`;
+  return `export('${moduleName}', ${toJsTree(statement, { embedded: true })})`;
 }
 
 function function_call([fn, ...params], options) {
-  const evaluated_params = params.map(p => toJsTree(p));
+  const evaluated_params = params.map(p => toJsTree(p, { embedded: true }));
 
   return `${fn}( ${evaluated_params.join(', ')} )`;
 }
