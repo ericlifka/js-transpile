@@ -1,6 +1,6 @@
 import { isArray, camelCase } from './utils';
 
-function letToVar(cmd, ...vars) {
+function letToVar([cmd, ...vars], options) {
   const varPairs = [];
   for (let i = 0; i < vars.length; i += 2) {
     let name = vars[ i ];
@@ -23,7 +23,7 @@ function letToVar(cmd, ...vars) {
   }
 }
 
-function math_operator(operator, ...params) {
+function math_operator([operator, ...params], options) {
   const statement = params.map(param =>
     isArray(param) ?
       toJsTree(param) :
@@ -33,7 +33,7 @@ function math_operator(operator, ...params) {
   return `(${statement})`;
 }
 
-function define_function(operator, name, params, ...body) {
+function define_function([operator, name, params, ...body], options) {
   if (isArray(name)) {
     body.unshift(params);
     params = name;
@@ -50,7 +50,7 @@ function define_function(operator, name, params, ...body) {
   return `(function ${name}(${params}) {${statements} return ${final};})`;
 }
 
-function define_module(operator, name, ...body) {
+function define_module([operator, name, ...body], options) {
   const statements = body
     .map(toJsTree)
     .map(s => s + ";")
@@ -59,7 +59,7 @@ function define_module(operator, name, ...body) {
   return `module('${name}', function (require, export) {${statements}})`;
 }
 
-function module_require(operator, moduleName, reqTokens) {
+function module_require([operator, moduleName, reqTokens], options) {
   const statements = reqTokens.map(token =>
     `var ${token} = ${moduleName}['${token}']`);
   statements.unshift(`var ${moduleName} = require('${moduleName}')`);
@@ -69,32 +69,32 @@ function module_require(operator, moduleName, reqTokens) {
     .join(' ');
 }
 
-function module_export(operator, moduleName, statement) {
+function module_export([operator, moduleName, statement], options) {
   return `export('${moduleName}', ${toJsTree(statement)})`;
 }
 
-function function_call(fn, ...params) {
+function function_call([fn, ...params], options) {
   const evaluated_params = params.map(p => toJsTree(p));
 
   return `${fn}( ${evaluated_params.join(', ')} )`;
 }
 
-export const toJsTree = function (arr) {
+export const toJsTree = function (arr, options = { }) {
   if (!isArray(arr)) {
     return arr;
   }
 
   switch(arr[0]) {
-    case 'function': return define_function(...arr);
-    case 'module': return define_module(...arr);
-    case 'require': return module_require(...arr);
-    case 'export': return module_export(...arr);
-    case 'let': return letToVar(...arr);
-    case '+': return math_operator(...arr);
-    case '-': return math_operator(...arr);
-    case '*': return math_operator(...arr);
-    case '/': return math_operator(...arr);
+    case 'function': return define_function(arr, options);
+    case 'module': return define_module(arr, options);
+    case 'require': return module_require(arr, options);
+    case 'export': return module_export(arr, options);
+    case 'let': return letToVar(arr, options);
+    case '+': return math_operator(arr, options);
+    case '-': return math_operator(arr, options);
+    case '*': return math_operator(arr, options);
+    case '/': return math_operator(arr, options);
   }
 
-  return function_call(...arr);
+  return function_call(arr, options);
 };
