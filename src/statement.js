@@ -9,3 +9,7 @@ export default class Statement {
     return "statement-obj()";
   }
 }
+
+export function infix_statement(options) {
+  return new Statement();
+}

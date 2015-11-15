@@ -24,13 +24,16 @@ function letToVar([cmd, ...vars], options) {
 }
 
 function math_operator([operator, ...params], options) {
-  const statement = params.map(param =>
+  const statements = params.map(param =>
     isArray(param) ?
       toJsTree(param, { embedded: true }) :
       param
-  ).join(` ${operator} `);
+  );
 
-  return `(${statement})`;
+  return infix_statement({
+    statements,
+    separator: ` ${operator} `
+  });
 }
 
 function define_function([operator, name, params, ...body], options) {
