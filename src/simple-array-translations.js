@@ -1,4 +1,5 @@
 import { isArray, camelCase } from './utils';
+import { infix_statement } from './statement';
 
 function letToVar([cmd, ...vars], options) {
   const varPairs = [];
