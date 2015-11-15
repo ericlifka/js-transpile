@@ -17,3 +17,11 @@ export const camelCase = str => {
   const [ first, ...rest ] = str.split('-');
   return first + rest.map(capitalize).join('');
 };
+
+export function merge(...objs) {
+  let newObj = { };
+  objs.forEach(ob => Object.keys(ob).forEach(key => {
+    newObj[key] = ob[key];
+  }));
+  return newObj;
+}
