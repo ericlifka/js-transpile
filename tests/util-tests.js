@@ -50,9 +50,9 @@ describe("utils", () => {
     });
   });
 
-  describe.only("#merge", () => {
+  describe("#merge", () => {
     it('should put any number of objects together', () => {
-      var res = merge({a: 1}, {b: 2}, {c: 3});
+      var res = merge({ a: 1 }, { b: 2 }, { c: 3 });
       res.a.should.equal(1);
       res.b.should.equal(2);
       res.c.should.equal(3);
@@ -60,6 +60,11 @@ describe("utils", () => {
 
     it('should return an object from the empty case', () => {
       merge().should.be.type('object');
-    })
+    });
+
+    it('should give precedence to the objects later in the list', () => {
+      var res = merge({ a: 1 }, { a: 2 });
+      res.a.should.equal(2);
+    });
   });
 });
