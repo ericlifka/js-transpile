@@ -31,10 +31,10 @@ function math_operator([operator, ...params], options) {
       param
   );
 
-  return infix_statement({
+  return infix_statement(merge(options, {
     statements,
     separator: ` ${operator} `
-  });
+  }));
 }
 
 function define_function([operator, name, params, ...body], options) {
