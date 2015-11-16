@@ -1,26 +1,33 @@
 import { isArray, camelCase } from './utils';
-import { infix_statement, token_statement } from './statement';
+import {
+  empty_statement,
+  infix_statement,
+  multi_line_statement,
+  token_statement
+} from './statement';
 
 function letToVar([cmd, ...vars], options) {
   const varPairs = [];
   for (let i = 0; i < vars.length; i += 2) {
     let name = vars[ i ];
     let val = vars[ i + 1 ];
-    if (name && val) {
-      if (isArray(val)) {
-        val = toJsTree(val, { embedded: true });
-      }
 
-      let statement = `${name} = ${val}`;
-      varPairs.push(statement);
+    if (name && val) {
+      varPairs.push(infix_statement({
+        statements: [ token_statement(`var ${name}`), toJsTree(val, { embedded: true }) ],
+        separator: ' = ',
+        terminate: true
+      }));
     }
   }
 
   if (varPairs.length < 1) {
-    return '';
+    return empty_statement();
   }
   else {
-    return `var ${varPairs.join(', ')};`;
+    return multi_line_statement(merge(options, {
+      statements: varPairs
+    }));
   }
 }
 

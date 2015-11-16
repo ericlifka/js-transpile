@@ -17,3 +17,11 @@ export function infix_statement(options) {
 export function token_statement(token) {
   return new Statement();
 }
+
+export function empty_statement() {
+  return new Statement();
+}
+
+export function multi_line_statement() {
+  return new Statement();
+}
