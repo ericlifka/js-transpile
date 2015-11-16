@@ -13,3 +13,7 @@ export default class Statement {
 export function infix_statement(options) {
   return new Statement();
 }
+
+export function token_statement(token) {
+  return new Statement();
+}

@@ -1,5 +1,5 @@
 import { isArray, camelCase } from './utils';
-import { infix_statement } from './statement';
+import { infix_statement, token_statement } from './statement';
 
 function letToVar([cmd, ...vars], options) {
   const varPairs = [];
@@ -25,14 +25,8 @@ function letToVar([cmd, ...vars], options) {
 }
 
 function math_operator([operator, ...params], options) {
-  const statements = params.map(param =>
-    isArray(param) ?
-      toJsTree(param, { embedded: true }) :
-      param
-  );
-
   return infix_statement(merge(options, {
-    statements,
+    statements: params.map(param => toJsTree(param, { embedded: true })),
     separator: ` ${operator} `
   }));
 }
@@ -85,7 +79,7 @@ function function_call([fn, ...params], options) {
 
 export const toJsTree = function (arr, options = { }) {
   if (!isArray(arr)) {
-    return arr;
+    return token_statement(arr);
   }
 
   switch(arr[0]) {
