@@ -1,5 +1,5 @@
 import should from 'should';
-import { isSymbolChar, isWhitespaceChar, isArray, camelCase } from '../src/utils';
+import { isSymbolChar, isWhitespaceChar, isArray, camelCase, merge } from '../src/utils';
 
 describe("utils", () => {
   describe("#isSymbolChar", () => {
@@ -48,5 +48,18 @@ describe("utils", () => {
       camelCase('thing-one').should.equal('thingOne');
       camelCase('one-two-three').should.equal('oneTwoThree');
     });
+  });
+
+  describe.only("#merge", () => {
+    it('should put any number of objects together', () => {
+      var res = merge({a: 1}, {b: 2}, {c: 3});
+      res.a.should.equal(1);
+      res.b.should.equal(2);
+      res.c.should.equal(3);
+    });
+
+    it('should return an object from the empty case', () => {
+      merge().should.be.type('object');
+    })
   });
 });
