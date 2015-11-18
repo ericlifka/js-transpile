@@ -22,8 +22,15 @@ export function empty_statement() {
   return { printString: () => '' };
 }
 
-export function multi_line_statement(options) {
-  return new Statement();
+export function multi_line_statement({statements}) {
+  return {
+    statements,
+    printString(...args) {
+      return statements
+        .map(s => s.printString(...args))
+        .join('');
+    }
+  };
 }
 
 /*
