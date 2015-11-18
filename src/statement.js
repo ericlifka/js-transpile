@@ -15,14 +15,14 @@ export function infix_statement(options) {
 }
 
 export function token_statement(token) {
-  return new Statement();
+  return { printString: () => token };
 }
 
 export function empty_statement() {
-  return new Statement();
+  return { printString: () => '' };
 }
 
-export function multi_line_statement() {
+export function multi_line_statement(options) {
   return new Statement();
 }
 
