@@ -1,5 +1,3 @@
-
-
 export default class Statement {
   constructor() {
 
@@ -10,8 +8,18 @@ export default class Statement {
   }
 }
 
-export function infix_statement(options) {
-  return new Statement();
+export function infix_statement({ statements, separator }) {
+  return {
+    statements,
+    separator,
+    printString() {
+      return "(" +
+        this.statements
+          .map(s => s.printString(...args))
+          .join(this.separator) +
+        ")";
+    }
+  }
 }
 
 export function token_statement(token) {
@@ -26,7 +34,7 @@ export function multi_line_statement({statements}) {
   return {
     statements,
     printString(...args) {
-      return statements
+      return this.statements
         .map(s => s.printString(...args))
         .join('');
     }
