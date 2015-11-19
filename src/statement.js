@@ -41,10 +41,15 @@ export function multi_line_statement({statements}) {
   };
 }
 
+export function block_statement(options) {
+
+}
+
 /*
 options I need to support:
 {
   terminate: bool - end the statement with a semicolon
   embedded: bool - statement should wrap itself in a self contained manner to be used inline in a larger statement
+ returnStatement: bool - statement should either return it's value or recursively pass down so that value is appropriately returned - will probably be very complex
 }
  */

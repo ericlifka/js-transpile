@@ -44,15 +44,23 @@ function define_function([operator, name, params, ...body], options) {
     params = name;
     name = "";
   }
-
-  let statements = body.map(toJsTree);
-  let final = statements.pop();
-  statements = statements
-    .map(s => s + ";")
-    .join(' ');
   params = params.join(', ');
 
-  return `(function ${name}(${params}) {${statements} return ${final};})`;
+  let final = body.pop();
+  if (final) {
+    final = toJsTree(final, { returnStatement: true, terminate: true });
+  } else {
+    final = token_statement('null', { returnStatement: true, terminate: true });
+  }
+
+  let statements = body.map(toJsTree, { terminate: true });
+  statements.push(final);
+
+  return block_statement(merge(options, {
+    openBlock: `function ${name}(${params}) {`,
+    statements,
+    closeBlock: `}`
+  }));
 }
 
 function define_module([operator, name, ...body], options) {
