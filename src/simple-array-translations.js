@@ -14,7 +14,7 @@ function letToVar([cmd, ...vars], options) {
 
     if (name && val) {
       varPairs.push(infix_statement({
-        statements: [ token_statement(`var ${name}`), toJsTree(val, { embedded: true }) ],
+        statements: [ token_statement({ token: `var ${name}`} ), toJsTree(val, { embedded: true }) ],
         separator: ' = ',
         terminate: true
       }));
@@ -50,7 +50,7 @@ function define_function([operator, name, params, ...body], options) {
   if (final) {
     final = toJsTree(final, { returnStatement: true, terminate: true });
   } else {
-    final = token_statement('null', { returnStatement: true, terminate: true });
+    final = token_statement({ token: 'null', returnStatement: true, terminate: true });
   }
 
   let statements = body.map(toJsTree, { terminate: true });
@@ -94,7 +94,7 @@ function function_call([fn, ...params], options) {
 
 export const toJsTree = function (arr, options = { }) {
   if (!isArray(arr)) {
-    return token_statement(arr);
+    return token_statement({ token: arr });
   }
 
   switch(arr[0]) {

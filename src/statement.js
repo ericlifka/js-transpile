@@ -22,9 +22,11 @@ export function infix_statement({ statements, separator }) {
   }
 }
 
-export function token_statement(token) {
+export function token_statement({ token, returnStatement, terminate }) {
   return {
     token,
+    returnStatement,
+    terminate,
     printString() {
       return `${this.token}`;
     }
