@@ -23,7 +23,12 @@ export function infix_statement({ statements, separator }) {
 }
 
 export function token_statement(token) {
-  return { printString: () => token };
+  return {
+    token,
+    printString() {
+      return `${this.token}`;
+    }
+  };
 }
 
 export function empty_statement() {
