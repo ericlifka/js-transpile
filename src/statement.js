@@ -41,8 +41,19 @@ export function multi_line_statement({statements}) {
   };
 }
 
-export function block_statement(options) {
-
+export function block_statement({ openBlock, statements, closeBlock }) {
+  return {
+    openBlock,
+    statements,
+    closeBlock,
+    printString(...args) {
+      return this.openBlock +
+          this.statements
+            .map(s => s.printString(...args))
+            .join('') +
+          this.closeBlock;
+    }
+  };
 }
 
 /*
