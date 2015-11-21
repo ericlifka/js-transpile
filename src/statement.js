@@ -28,7 +28,9 @@ export function token_statement({ token, returnStatement, terminate }) {
     returnStatement,
     terminate,
     printString() {
-      return `${this.token}`;
+      return this.returnStatement ? 'return ' : '' +
+        this.token +
+        this.terminate ? ';' : '';
     }
   };
 }
