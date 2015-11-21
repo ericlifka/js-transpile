@@ -64,12 +64,13 @@ function define_function([operator, name, params, ...body], options) {
 }
 
 function define_module([operator, name, ...body], options) {
-  const statements = body
-    .map(toJsTree)
-    .map(s => s + ";")
-    .join(' ');
+  const statements = body.map(toJsTree, { terminate: true });
 
-  return `module('${name}', function (require, export) {${statements}})`;
+  return block_statement(merge(options, {
+    openBlock: `module('${name}', function (require, export) {`,
+    statements,
+    closeBlock: `})`
+  }));
 }
 
 function module_require([operator, moduleName, reqTokens], options) {
