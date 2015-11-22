@@ -77,13 +77,17 @@ function define_module([operator, name, ...body], options) {
 }
 
 function module_require([operator, moduleName, reqTokens], options) {
-  const statements = reqTokens.map(token =>
-    `var ${token} = ${moduleName}['${token}']`);
-  statements.unshift(`var ${moduleName} = require('${moduleName}')`);
+  const statements = reqTokens.map(token => token_statement({
+    token: `var ${token} = ${moduleName}['${token}']`,
+    terminate: true
+  }));
 
-  return statements
-    .map(s => s + ';')
-    .join(' ');
+  statements.unshift(token_statement({
+    token: `var ${moduleName} = require('${moduleName}')`,
+    terminate: true
+  }));
+
+  return multi_line_statement(merge(options, { statements }));
 }
 
 function module_export([operator, moduleName, statement], options) {
