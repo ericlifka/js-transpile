@@ -102,9 +102,11 @@ function module_export([operator, moduleName, statement], options) {
 }
 
 function function_call([fn, ...params], options) {
-  const evaluated_params = params.map(p => toJsTree(p, { embedded: true }));
-
-  return `${fn}( ${evaluated_params.join(', ')} )`;
+  return function_statement({
+    openStatement: `${fn}(`,
+    parameters: params.map(p => toJsTree(p, { embedded: true })),
+    closeStatement: `)`
+  });
 }
 
 export const toJsTree = function (arr, options = { }) {
