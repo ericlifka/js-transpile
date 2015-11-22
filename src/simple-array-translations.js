@@ -28,11 +28,10 @@ function letToVar([cmd, ...vars], options) {
   if (varPairs.length < 1) {
     return empty_statement();
   }
-  else {
-    return multi_line_statement(merge(options, {
-      statements: varPairs
-    }));
-  }
+
+  return multi_line_statement(merge(options, {
+    statements: varPairs
+  }));
 }
 
 function math_operator([operator, ...params], options) {
