@@ -65,6 +65,21 @@ export function block_statement({ openBlock, statements, closeBlock }) {
   };
 }
 
+export function function_statement({ openStatement, parameters, closeStatement }) {
+  return {
+    openStatement,
+    parameters,
+    closeStatement,
+    printString(...args) {
+      return this.openStatement +
+          this.parameters
+            .map(s => s.printString(...args))
+            .join(', ') +
+        this.closeStatement;
+    }
+  };
+}
+
 /*
 options I need to support:
 {

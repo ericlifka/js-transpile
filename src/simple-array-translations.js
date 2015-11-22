@@ -2,6 +2,7 @@ import { isArray, camelCase } from './utils';
 import {
   block_statement,
   empty_statement,
+  function_statement,
   infix_statement,
   multi_line_statement,
   token_statement
