@@ -56,7 +56,7 @@ function define_function([operator, name, params, ...body], options) {
     final = token_statement({ token: 'null', returnStatement: true, terminate: true });
   }
 
-  let statements = body.map(toJsTree, { terminate: true });
+  let statements = body.map(s => toJsTree(s, { terminate: true }));
   statements.push(final);
 
   return block_statement(merge(options, {
@@ -67,7 +67,7 @@ function define_function([operator, name, params, ...body], options) {
 }
 
 function define_module([operator, name, ...body], options) {
-  const statements = body.map(toJsTree, { terminate: true });
+  const statements = body.map(s => toJsTree(s, { terminate: true }));
 
   return block_statement(merge(options, {
     openBlock: `module('${name}', function (require, export) {`,
