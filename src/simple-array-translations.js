@@ -91,7 +91,14 @@ function module_require([operator, moduleName, reqTokens], options) {
 }
 
 function module_export([operator, moduleName, statement], options) {
-  return `export('${moduleName}', ${toJsTree(statement, { embedded: true })})`;
+  return function_statement({
+    openStatement: `export(`,
+    parameters: [
+      token_statement({ token: `'${moduleName}'` }),
+      toJsTree(statement, { embedded: true })
+    ],
+    closeStatement: `)`
+  });
 }
 
 function function_call([fn, ...params], options) {
