@@ -21,7 +21,7 @@ function letToVar([cmd, ...vars], options) {
     if (name && val) {
       varPairs.push(infix_statement({
         statements: [
-          token_statement({ token: `var ${name}`} ),
+          token_statement({ token: `var ${name}`}),
           toJsTree(val, { embedded: true })
         ],
         separator: ' = ',
