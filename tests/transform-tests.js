@@ -43,8 +43,8 @@ describe('transform', () => {
   });
 
   describe('function calls', () => {
-    test('(some_func 1 2 3)', 'some_func( 1, 2, 3 )');
-    test('(func 1 (nested 2 3))', 'func( 1, nested( 2, 3 ) )');
+    test('(some_func 1 2 3)', 'some_func(1, 2, 3)');
+    test('(func 1 (nested 2 3))', 'func(1, nested(2, 3))');
     test('(empty_func)', 'empty_func()');
   });
 
