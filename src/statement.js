@@ -12,7 +12,7 @@ export function infix_statement({ statements, separator }) {
   return {
     statements,
     separator,
-    printString() {
+    printString(...args) {
       return "(" +
         this.statements
           .map(s => s.printString(...args))
