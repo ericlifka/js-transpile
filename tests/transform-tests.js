@@ -11,7 +11,7 @@ describe('transform', () => {
 
   describe('variables', () => {
     test('(let a 2)', 'var a = 2;');
-    test('(let a 2 b 4 c 5)', 'var a = 2, b = 4, c = 5;');
+    test('(let a 2 b 4 c 5)', 'var a = 2;var b = 4;var c = 5;');
     test('(let a (+ 1 2))', 'var a = (1 + 2);');
   });
 

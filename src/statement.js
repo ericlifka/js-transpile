@@ -8,18 +8,28 @@ export default class Statement {
   }
 }
 
-export function infix_statement({ statements, separator }) {
+export function infix_statement({ statements, separator, terminate, embedded }) {
   return {
     statements,
     separator,
+    terminate,
+    embedded,
     printString(...args) {
-      return "(" +
-        this.statements
-          .map(s => s.printString(...args))
-          .join(this.separator) +
-        ")";
+      let statement = this.statements
+        .map(s => s.printString(...args))
+        .join(this.separator);
+
+      if (this.embedded) {
+        statement = `(${statement})`;
+      }
+
+      if (this.terminate) {
+        statement += ";";
+      }
+
+      return statement;
     }
-  }
+  };
 }
 
 export function token_statement({ token, returnStatement, terminate }) {
