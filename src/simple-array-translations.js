@@ -1,4 +1,8 @@
-import { isArray, camelCase } from './utils';
+import {
+  camelCase,
+  isArray,
+  merge
+} from './utils';
 import {
   block_statement,
   empty_statement,
