@@ -65,17 +65,34 @@ export function multi_line_statement({statements}) {
   };
 }
 
-export function block_statement({ openBlock, statements, closeBlock }) {
+export function block_statement({ openBlock, statements, closeBlock, returnStatement, embedded, terminate }) {
   return {
     openBlock,
     statements,
     closeBlock,
+    returnStatement,
+    embedded,
+    terminate,
     printString(...args) {
-      return this.openBlock +
+      let statement = this.openBlock +
           this.statements
             .map(s => s.printString(...args))
             .join('') +
           this.closeBlock;
+
+      if (this.embedded) {
+        statement = `(${statement})`;
+      }
+
+      if (this.returnStatement) {
+        statement = "return " + statement;
+      }
+
+      if (this.terminate) {
+        statement += ";";
+      }
+
+      return statement;
     }
   };
 }
