@@ -116,7 +116,7 @@ function function_call([fn, ...params], options) {
 
 export const toJsTree = function (arr, options = { }) {
   if (!isArray(arr)) {
-    return token_statement({ token: arr });
+    return token_statement(merge(options, { token: arr }));
   }
 
   switch(arr[0]) {
