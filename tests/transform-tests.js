@@ -66,7 +66,7 @@ describe('transform', () => {
       `module('testEm', function (require, export) {export('varA', (1 + 2));})`);
     test(`
       (module testEmA
-        (require testEmB (var-a)))
+        (require testEmB (varA)))
       `,
       `module('testEmA', function (require, export) {
          var testEmB = require('testEmB');
