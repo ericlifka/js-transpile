@@ -53,7 +53,7 @@ describe('transform', () => {
     describe('objects', () => {});
   });
 
-  describe.only('modules', () => {
+  describe('modules', () => {
     test(`
       (module testEm
         (+ 1 2))
@@ -68,10 +68,7 @@ describe('transform', () => {
       (module testEmA
         (require testEmB (varA)))
       `,
-      `module('testEmA', function (require, export) {
-         var testEmB = require('testEmB');
-         var varA = testEmB['varA'];
-       })`);
+      `module('testEmA', function (require, export) {var testEmB = require('testEmB');var varA = testEmB['varA'];})`);
     test(`
       (module testEmA
         (require testEmB
@@ -79,12 +76,7 @@ describe('transform', () => {
            varB
            varC)))
       `,
-      `module('testEmA', function (require, export) {
-         var testEmB = require('testEmB');
-         var varA = testEmB['varA'];
-         var varB = testEmB['varB'];
-         var varC = testEmB['varC'];
-       })`);
+      `module('testEmA', function (require, export) {var testEmB = require('testEmB');var varA = testEmB['varA'];var varB = testEmB['varB'];var varC = testEmB['varC'];})`);
   });
 
   describe('calling methods on dynamic entities', () => {});
