@@ -96,14 +96,14 @@ function module_require([operator, moduleName, reqTokens], options) {
 }
 
 function module_export([operator, moduleName, statement], options) {
-  return function_statement({
+  return function_statement(merge(options, {
     openStatement: `export(`,
     parameters: [
       token_statement({ token: `'${moduleName}'` }),
       toJsTree(statement, { embedded: true })
     ],
     closeStatement: `)`
-  });
+  }));
 }
 
 function function_call([fn, ...params], options) {

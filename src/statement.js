@@ -75,17 +75,19 @@ export function block_statement({ openBlock, statements, closeBlock }) {
   };
 }
 
-export function function_statement({ openStatement, parameters, closeStatement }) {
+export function function_statement({ openStatement, parameters, closeStatement, terminate }) {
   return {
     openStatement,
     parameters,
     closeStatement,
+    terminate,
     printString(...args) {
       return this.openStatement +
           this.parameters
             .map(s => s.printString(...args))
             .join(', ') +
-        this.closeStatement;
+        this.closeStatement +
+        (this.terminate ? ';' : '');
     }
   };
 }
