@@ -34,7 +34,7 @@ describe('transform', () => {
     describe('while loops', () => {});
   });
 
-  describe.only('function literals', () => {
+  describe('function literals', () => {
     test('(function ())', 'function () {return null;}');
     test('(function () 4)', '(function () { return 4;})');
     test('(function (x y) (+ x y))', '(function (x, y) { return (x + y);})');
