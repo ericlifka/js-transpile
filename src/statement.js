@@ -8,10 +8,11 @@ export default class Statement {
   }
 }
 
-export function infix_statement({ statements, separator, terminate, embedded }) {
+export function infix_statement({ statements, separator, returnStatement, terminate, embedded }) {
   return {
     statements,
     separator,
+    returnStatement,
     terminate,
     embedded,
     printString(...args) {
@@ -25,6 +26,10 @@ export function infix_statement({ statements, separator, terminate, embedded }) 
 
       if (this.terminate) {
         statement += ";";
+      }
+
+      if (this.returnStatement) {
+        statement = "return " + statement;
       }
 
       return statement;
