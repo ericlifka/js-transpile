@@ -53,12 +53,12 @@ describe('transform', () => {
     describe('objects', () => {});
   });
 
-  describe('modules', () => {
+  describe.only('modules', () => {
     test(`
       (module testEm
         (+ 1 2))
       `,
-      `module('testEm', function (require, export) {(1 + 2);})`);
+      `module('testEm', function (require, export) {1 + 2;})`);
     test(`
       (module testEm
         (export varA (+ 1 2)))
