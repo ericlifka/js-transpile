@@ -26,6 +26,17 @@ describe('transform', () => {
     test('(Math.pow 2 4)', 'Math.pow(2, 4)');
     test('(Math.abs -4)', 'Math.abs(-4)');
     test('(Math.pow (* 2 3) (- 2 4))', 'Math.pow((2 * 3), (2 - 4))');
+
+    test('(= a b)', 'a === b');
+    test('(> a b)', 'a > b');
+    test('(>= a b)', 'a >= b');
+    test('(< a b)', 'a < b');
+    test('(>= a b)', 'a <= b');
+    test('(= a b c)', 'a === b && b === c');
+    test('(> a b c)', 'a > b && b > c');
+    test('(>= a b c)', 'a >= b && b >= c');
+    test('(< a b c)', 'a < b && b < c');
+    test('(<= a b c)', 'a <= b && b <= c');
   });
 
   describe('control flow', () => {
