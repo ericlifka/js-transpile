@@ -23,10 +23,6 @@ describe('transform', () => {
     test('(* (+ 2 4) (- 5 3))', '(2 + 4) * (5 - 3)');
     test('(+ 2 3 4 5)', '2 + 3 + 4 + 5');
 
-    test('(Math.pow 2 4)', 'Math.pow(2, 4)');
-    test('(Math.abs -4)', 'Math.abs(-4)');
-    test('(Math.pow (* 2 3) (- 2 4))', 'Math.pow((2 * 3), (2 - 4))');
-
     test('(= a b)', 'a === b');
     test('(> a b)', 'a > b');
     test('(>= a b)', 'a >= b');
@@ -37,6 +33,16 @@ describe('transform', () => {
     test('(>= a b c)', 'a >= b && b >= c');
     test('(< a b c)', 'a < b && b < c');
     test('(<= a b c)', 'a <= b && b <= c');
+  });
+
+  describe('helpers and library functions', () => {
+    test('(Math.pow 2 4)', 'Math.pow(2, 4)');
+    test('(Math.abs -4)', 'Math.abs(-4)');
+    test('(Math.pow (* 2 3) (- 2 4))', 'Math.pow((2 * 3), (2 - 4))');
+
+    test(`(print a)`, `console.log(a)`);
+    test(`(print "abc")`, `console.log("abc")`);
+    test(`(print a, 2, "abc")`, `console.log(a, 2, "abc")`);
   });
 
   describe('control flow', () => {
