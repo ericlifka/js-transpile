@@ -48,6 +48,19 @@ describe('transform', () => {
           else (print 3))
         `,
         `if (a === 1) {console.log(1);} else if (a === 2) {console.log(2);} else {console.log(3);}`);
+      test(`
+        (function ()
+          (if (= a 4)
+            "abc"
+            "def"))
+        `,
+        `function () {if (a === 4) {return "abc";} else {return "def";}}`);
+      test(`
+        (let a (if (= b 4)
+                 5
+                 6))
+        `,
+        `var a = (function () {if (b === 4) {return 5;} else {return 6;}})();`);
     });
     describe('for loops', () => {});
     describe('while loops', () => {});
