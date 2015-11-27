@@ -29,7 +29,26 @@ describe('transform', () => {
   });
 
   describe('control flow', () => {
-    describe('if else', () => {});
+    describe('if else', () => {
+      test(`
+        (if (= a 4)
+          (print "hit!"))
+        `,
+        `if (a === 4) {console.log("hit!");}`);
+      test(`
+        (if (= a 4)
+          (print "hit!")
+          (print "miss!"))
+        `,
+        `if (a === 4) {console.log("hit!");} else { console.log("miss!");}`);
+      test(`
+        (cond
+          (= a 1) (print 1)
+          (= a 2) (print 2)
+          else (print 3))
+        `,
+        `if (a === 1) {console.log(1);} else if (a === 2) {console.log(2);} else {console.log(3);}`);
+    });
     describe('for loops', () => {});
     describe('while loops', () => {});
   });
