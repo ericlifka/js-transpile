@@ -42,7 +42,7 @@ describe('transform', () => {
 
     test(`(print a)`, `console.log(a)`);
     test(`(print "abc")`, `console.log("abc")`);
-    test(`(print a, 2, "abc")`, `console.log(a, 2, "abc")`);
+    test(`(print a 2 "abc")`, `console.log(a, 2, "abc")`);
   });
 
   describe('control flow', () => {
