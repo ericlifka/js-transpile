@@ -47,6 +47,10 @@ function math_operator([operator, ...params], options) {
   }));
 }
 
+function logical_operator([operator, ...params], options) {
+  // TODO
+}
+
 function define_function([operator, name, params, ...body], options) {
   if (isArray(name)) {
     body.unshift(params);
@@ -132,6 +136,11 @@ export const toJsTree = function (arr, options = { }) {
     case '-': return math_operator(arr, options);
     case '*': return math_operator(arr, options);
     case '/': return math_operator(arr, options);
+    case '=': return logical_operator(arr, options);
+    case '>': return logical_operator(arr, options);
+    case '<': return logical_operator(arr, options);
+    case '>=': return logical_operator(arr, options);
+    case '<=': return logical_operator(arr, options);
   }
 
   return function_call(arr, options);
