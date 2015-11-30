@@ -8,7 +8,7 @@ describe("utils", () => {
         isSymbolChar(char).should.equal(true));
     });
     it('should reject non-symbol characters', () => {
-      "!@#%^&()[]{}\\|?,<>".split('').forEach(char =>
+      "!@#%^&()[]{}\\|?,".split('').forEach(char =>
         isSymbolChar(char).should.equal(false));
     });
   });
