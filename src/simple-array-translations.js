@@ -48,7 +48,10 @@ function math_operator([operator, ...params], options) {
 }
 
 function logical_operator([operator, ...params], options) {
-  // TODO
+  return infix_statement(merge(options, {
+    statements: params.map(param => toJsTree(param, { embedded: true })),
+    separator: ` ${operator} `
+  }));
 }
 
 function define_function([operator, name, params, ...body], options) {
