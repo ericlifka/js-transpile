@@ -15,6 +15,12 @@ describe('transform', () => {
     test('(let a (+ 1 2))', 'var a = (1 + 2);');
   });
 
+  describe('literals', () => {
+    test('(= a nil)', 'a === null');
+    test('(= a t)', 'a === true');
+    test('(= a f)', 'a === false');
+  });
+
   describe('math', () => {
     test('(+ 1 2)', '1 + 2');
     test('(- 9 6)', '9 - 6');
