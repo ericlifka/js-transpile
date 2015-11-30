@@ -33,7 +33,7 @@ describe('transform', () => {
     test('(> a b)', 'a > b');
     test('(>= a b)', 'a >= b');
     test('(< a b)', 'a < b');
-    test('(>= a b)', 'a <= b');
+    test('(<= a b)', 'a <= b');
     test('(= a b c)', 'a === b && b === c');
     test('(> a b c)', 'a > b && b > c');
     test('(>= a b c)', 'a >= b && b >= c');
