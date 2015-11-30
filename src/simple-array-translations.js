@@ -116,11 +116,11 @@ function function_call([fn, ...params], options) {
 }
 
 export const toJsTree = function (arr, options = { }) {
+  arr = builtinMacros(arr, options);
+
   if (!isArray(arr)) {
     return token_statement(merge(options, { token: arr }));
   }
-
-  arr = builtinMacros(arr, options);
 
   switch(arr[0]) {
     case 'function': return define_function(arr, options);
