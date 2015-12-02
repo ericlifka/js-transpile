@@ -11,7 +11,10 @@ import {
   multi_line_statement,
   token_statement
 } from './statement';
-import builtinMacros from './builtin-macros';
+import {
+  token_macros,
+  list_macros
+} from './builtin-macros';
 
 function letToVar([cmd, ...vars], options) {
   const varPairs = [];
@@ -153,11 +156,13 @@ function function_call([fn, ...params], options) {
 }
 
 export const toJsTree = function (arr, options = { }) {
-  arr = builtinMacros(arr, options);
-
   if (!isArray(arr)) {
+    arr = token_macros(arr, options);
+
     return token_statement(merge(options, { token: arr }));
   }
+
+  arr = list_macros(arr, options);
 
   switch(arr[0]) {
     case 'function': return define_function(arr, options);
