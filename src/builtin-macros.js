@@ -8,5 +8,6 @@ export function token_macros(token, options) {
 }
 
 export function list_macros(arr, options) {
+
   return arr;
 }
