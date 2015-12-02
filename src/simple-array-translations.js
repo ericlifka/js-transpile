@@ -48,6 +48,10 @@ function math_operator([operator, ...params], options) {
 }
 
 function logical_operator([operator, ...params], options) {
+  if (operator === '=') {
+    operator = '===';
+  }
+
   if (params.length <= 1) {
     throw "logical operators require at least two parameters";
   }
