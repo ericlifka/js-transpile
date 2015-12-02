@@ -48,10 +48,36 @@ function math_operator([operator, ...params], options) {
 }
 
 function logical_operator([operator, ...params], options) {
-  return infix_statement(merge(options, {
-    statements: params.map(param => toJsTree(param, { embedded: true })),
-    separator: ` ${operator} `
-  }));
+  if (params.length <= 1) {
+    throw "logical operators require at least two parameters";
+  }
+  else if (params.length === 2) {
+    return infix_statement(merge(options, {
+      statements: params.map(param => toJsTree(param, { embedded: true })),
+      separator: ` ${operator} `
+    }));
+  }
+  else {
+    let pairs = [];
+    for (let i = 0; i < params.length - 1; i++) {
+      let first = params[ i ];
+      let second = params [ i + 1 ];
+
+      pairs.push(infix_statement({
+        statements: [
+          toJsTree(first, { embedded: true }),
+          toJsTree(second, { embedded: true })
+        ],
+        separator: ` ${operator} `,
+        embedded: true
+      }));
+    }
+
+    return infix_statement(merge(options, {
+      statements: pairs,
+      separator: ` && `
+    }));
+  }
 }
 
 function define_function([operator, name, params, ...body], options) {
