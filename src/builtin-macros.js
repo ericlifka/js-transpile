@@ -14,6 +14,6 @@ export function list_macros(arr, options) {
   }
 }
 
-function print_macro(arr, options) {
-  return arr;
+function print_macro([fn, ...args], options) {
+  return ['console.log', ...args];
 }

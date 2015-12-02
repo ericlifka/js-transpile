@@ -180,6 +180,6 @@ export const toJsTree = function (arr, options = { }) {
     case '>=': return logical_operator(arr, options);
     case '<=': return logical_operator(arr, options);
 
-    default: function_call(arr, options);
+    default: return function_call(arr, options);
   }
 };
