@@ -39,6 +39,9 @@ describe('transform', () => {
     test('(>= a b c)', '(a >= b) && (b >= c)');
     test('(< a b c)', '(a < b) && (b < c)');
     test('(<= a b c)', '(a <= b) && (b <= c)');
+    test('(> a b c d)', '(a > b) && (b > c) && (c > d)');
+    test('(> a b c d e)', '(a > b) && (b > c) && (c > d) && (d > e)');
+    test('(> a b c d e g)', '(a > b) && (b > c) && (c > d) && (d > e) && (e > g)');
   });
 
   describe('helpers and library functions', () => {
