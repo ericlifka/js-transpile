@@ -8,6 +8,12 @@ export function token_macros(token, options) {
 }
 
 export function list_macros(arr, options) {
+  switch(arr[0]) {
+    case 'print': return print_macro(arr, options);
+    default: return arr;
+  }
+}
 
+function print_macro(arr, options) {
   return arr;
 }
