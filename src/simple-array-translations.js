@@ -44,7 +44,20 @@ function let_to_var([cmd, ...vars], options) {
 }
 
 function if_block([operator, conditional, truePath, falsePath], options) {
-  return empty_statement();
+  return block_statement({
+    openBlock: infix_statement({
+      statements: [
+        token_statement({ token: 'if' }),
+        toJsTree(conditional, { embedded: true }),
+        token_statement({ token: '{' })
+      ],
+      separator: ' '
+    }),
+    statements: [
+      toJsTree(truePath, { terminate: true })
+    ],
+    closeBlock: token_statement({ token: `}` })
+  });
 }
 
 function math_operator([operator, ...params], options) {

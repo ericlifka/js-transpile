@@ -55,7 +55,7 @@ describe('transform', () => {
   });
 
   describe('control flow', () => {
-    describe('if else', () => {
+    describe.only('if else', () => {
       test(`
         (if (= a 4)
           (print "hit!"))
