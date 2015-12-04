@@ -74,11 +74,11 @@ export function block_statement({ openBlock, statements, closeBlock, returnState
     embedded,
     terminate,
     printString(...args) {
-      let statement = this.openBlock +
+      let statement = this.openBlock.printString(...args) +
           this.statements
             .map(s => s.printString(...args))
             .join('') +
-          this.closeBlock;
+          this.closeBlock.printString(...args);
 
       if (this.embedded) {
         statement = `(${statement})`;

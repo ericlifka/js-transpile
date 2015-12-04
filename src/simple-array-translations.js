@@ -110,9 +110,9 @@ function define_function([operator, name, params, ...body], options) {
   statements.push(final);
 
   return block_statement(merge(options, {
-    openBlock: `function ${name}(${params}) {`,
+    openBlock: token_statement({ token: `function ${name}(${params}) {` }),
     statements,
-    closeBlock: `}`
+    closeBlock: token_statement({ token: `}` })
   }));
 }
 
@@ -120,9 +120,9 @@ function define_module([operator, name, ...body], options) {
   const statements = body.map(s => toJsTree(s, { terminate: true }));
 
   return block_statement(merge(options, {
-    openBlock: `module('${name}', function (require, export) {`,
+    openBlock: token_statement({ token: `module('${name}', function (require, export) {` }),
     statements,
-    closeBlock: `})`
+    closeBlock: token_statement({ token: `})` })
   }));
 }
 
