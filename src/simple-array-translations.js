@@ -43,6 +43,10 @@ function letToVar([cmd, ...vars], options) {
   }));
 }
 
+function if_block([operator, conditional, truePath, falsePath], options) {
+  return empty_statement();
+}
+
 function math_operator([operator, ...params], options) {
   return infix_statement(merge(options, {
     statements: params.map(param => toJsTree(param, { embedded: true })),
@@ -169,7 +173,10 @@ export const toJsTree = function (arr, options = { }) {
     case 'module': return define_module(arr, options);
     case 'require': return module_require(arr, options);
     case 'export': return module_export(arr, options);
+
     case 'let': return letToVar(arr, options);
+    case 'if': return if_block(arr, options);
+
     case '+': return math_operator(arr, options);
     case '-': return math_operator(arr, options);
     case '*': return math_operator(arr, options);
