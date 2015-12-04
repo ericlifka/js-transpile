@@ -16,7 +16,7 @@ import {
   list_macros
 } from './builtin-macros';
 
-function letToVar([cmd, ...vars], options) {
+function let_to_var([cmd, ...vars], options) {
   const varPairs = [];
   for (let i = 0; i < vars.length; i += 2) {
     let name = vars[ i ];
@@ -174,7 +174,7 @@ export const toJsTree = function (arr, options = { }) {
     case 'require': return module_require(arr, options);
     case 'export': return module_export(arr, options);
 
-    case 'let': return letToVar(arr, options);
+    case 'let': return let_to_var(arr, options);
     case 'if': return if_block(arr, options);
 
     case '+': return math_operator(arr, options);
