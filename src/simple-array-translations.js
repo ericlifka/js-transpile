@@ -165,11 +165,11 @@ function module_export([operator, moduleName, statement], options) {
 }
 
 function function_call([fn, ...params], options) {
-  return function_statement({
+  return function_statement(merge(options, {
     openStatement: `${fn}(`,
     parameters: params.map(p => toJsTree(p, { embedded: true })),
     closeStatement: `)`
-  });
+  }));
 }
 
 export const toJsTree = function (arr, options = { }) {
