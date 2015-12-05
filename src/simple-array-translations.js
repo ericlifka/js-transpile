@@ -44,7 +44,7 @@ function let_to_var([cmd, ...vars], options) {
 }
 
 function if_block([operator, conditional, truePath, falsePath], options) {
-  return block_statement({
+  const truePathBlock = block_statement({
     openBlock: infix_statement({
       statements: [
         token_statement({ token: 'if' }),
@@ -56,8 +56,23 @@ function if_block([operator, conditional, truePath, falsePath], options) {
     statements: [
       toJsTree(truePath, { terminate: true })
     ],
-    closeBlock: token_statement({ token: `}` })
+    closeBlock: token_statement({ token: '}' })
   });
+
+  if (falsePath) {
+    const falsePathBlock = block_statement({
+      openBlock: token_statement({ token: 'else {' }),
+      statements: [ toJsTree(falsePath, { terminate: true }) ],
+      closeBlock: token_statement({ token: '}' })
+    });
+
+    return multi_line_statement({
+      statements: [ truePathBlock, falsePathBlock ]
+    });
+  }
+  else {
+    return truePathBlock;
+  }
 }
 
 function math_operator([operator, ...params], options) {
