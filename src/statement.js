@@ -60,7 +60,7 @@ export function multi_line_statement({statements}) {
     printString(...args) {
       return this.statements
         .map(s => s.printString(...args))
-        .join('');
+        .join(' ');
     }
   };
 }

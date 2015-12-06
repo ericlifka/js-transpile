@@ -11,7 +11,7 @@ describe('transform', () => {
 
   describe('variables', () => {
     test('(let a 2)', 'var a = 2;');
-    test('(let a 2 b 4 c 5)', 'var a = 2;var b = 4;var c = 5;');
+    test('(let a 2 b 4 c 5)', 'var a = 2; var b = 4; var c = 5;');
     test('(let a (+ 1 2))', 'var a = (1 + 2);');
   });
 
@@ -126,7 +126,7 @@ describe('transform', () => {
       (module testEmA
         (require testEmB (varA)))
       `,
-      `module('testEmA', function (require, export) {var testEmB = require('testEmB');var varA = testEmB['varA'];})`);
+      `module('testEmA', function (require, export) {var testEmB = require('testEmB'); var varA = testEmB['varA'];})`);
     test(`
       (module testEmA
         (require testEmB
@@ -134,7 +134,7 @@ describe('transform', () => {
            varB
            varC)))
       `,
-      `module('testEmA', function (require, export) {var testEmB = require('testEmB');var varA = testEmB['varA'];var varB = testEmB['varB'];var varC = testEmB['varC'];})`);
+      `module('testEmA', function (require, export) {var testEmB = require('testEmB'); var varA = testEmB['varA']; var varB = testEmB['varB']; var varC = testEmB['varC'];})`);
   });
 
   describe('calling methods on dynamic entities', () => {});
