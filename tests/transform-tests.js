@@ -66,7 +66,7 @@ describe('transform', () => {
           (print "hit!")
           (print "miss!"))
         `,
-        `if (a === 4) {console.log("hit!");} else { console.log("miss!");}`);
+        `if (a === 4) {console.log("hit!");} else {console.log("miss!");}`);
       test(`
         (cond
           (= a 1) (print 1)
