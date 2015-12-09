@@ -54,7 +54,7 @@ function if_block([operator, conditional, truePath, falsePath], options) {
       separator: ' '
     }),
     statements: [
-      toJsTree(truePath, { terminate: true })
+      toJsTree(truePath, merge(options, { terminate: true }))
     ],
     closeBlock: token_statement({ token: '}' })
   });
@@ -62,7 +62,9 @@ function if_block([operator, conditional, truePath, falsePath], options) {
   if (falsePath) {
     const falsePathBlock = block_statement({
       openBlock: token_statement({ token: 'else {' }),
-      statements: [ toJsTree(falsePath, { terminate: true }) ],
+      statements: [
+        toJsTree(falsePath, merge(options, { terminate: true }))
+      ],
       closeBlock: token_statement({ token: '}' })
     });
 
