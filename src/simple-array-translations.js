@@ -45,6 +45,11 @@ function let_to_var([cmd, ...vars], options) {
 }
 
 function if_block([operator, conditional, truePath, falsePath], options) {
+  const pathOptions = {
+    terminate: true,
+    returnStatement: options.returnStatement || options.embedded
+  };
+
   const truePathBlock = block_statement({
     openBlock: infix_statement({
       statements: [
@@ -55,7 +60,7 @@ function if_block([operator, conditional, truePath, falsePath], options) {
       separator: ' '
     }),
     statements: [
-      toJsTree(truePath, merge(options, { terminate: true }))
+      toJsTree(truePath, pathOptions)
     ],
     closeBlock: token_statement({ token: '}' })
   });
@@ -65,7 +70,7 @@ function if_block([operator, conditional, truePath, falsePath], options) {
     const falsePathBlock = block_statement({
       openBlock: token_statement({ token: 'else {' }),
       statements: [
-        toJsTree(falsePath, merge(options, { terminate: true }))
+        toJsTree(falsePath, pathOptions)
       ],
       closeBlock: token_statement({ token: '}' })
     });
@@ -79,7 +84,7 @@ function if_block([operator, conditional, truePath, falsePath], options) {
   }
 
   if (options.embedded) {
-    return self_calling_wrapper_statement({ content: ifStatement });
+    return self_calling_wrapper_statement(merge(options, { content: ifStatement }));
   } else {
     return ifStatement;
   }
