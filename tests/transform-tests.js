@@ -55,7 +55,7 @@ describe('transform', () => {
   });
 
   describe('control flow', () => {
-    describe.only('if else', () => {
+    describe('if else', () => {
       test(`
         (if (= a 4)
           (print "hit!"))
@@ -86,7 +86,7 @@ describe('transform', () => {
                  5
                  6))
         `,
-        `var a = (function () {if (b === 4) {return 5;} else {return 6;}})();`);
+        `var a = (function () {if (b === 4) {return 5;} else {return 6;}}());`);
     });
     describe('for loops', () => {});
     describe('while loops', () => {});
