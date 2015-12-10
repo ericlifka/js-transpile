@@ -114,6 +114,14 @@ export function function_statement({ openStatement, parameters, closeStatement, 
   };
 }
 
+export function self_calling_wrapper_statement({ content, terminate }) {
+  return block_statement({
+    openBlock: '(function () {',
+    statements: [ content ],
+    closeBlock: '}())',
+    terminate
+  });
+}
 /*
 options I need to support:
 {

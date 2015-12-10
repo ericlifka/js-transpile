@@ -9,6 +9,7 @@ import {
   function_statement,
   infix_statement,
   multi_line_statement,
+  self_calling_wrapper_statement,
   token_statement
 } from './statement';
 import {
@@ -59,6 +60,7 @@ function if_block([operator, conditional, truePath, falsePath], options) {
     closeBlock: token_statement({ token: '}' })
   });
 
+  let ifStatement;
   if (falsePath) {
     const falsePathBlock = block_statement({
       openBlock: token_statement({ token: 'else {' }),
@@ -68,18 +70,23 @@ function if_block([operator, conditional, truePath, falsePath], options) {
       closeBlock: token_statement({ token: '}' })
     });
 
-    const ifStatement = multi_line_statement({
+    ifStatement = multi_line_statement({
       statements: [ truePathBlock, falsePathBlock ]
     });
-
-    if (options.embedded) {
-      return self_calling_wrapper_statement(ifStatement);
-    } else {
-      return ifStatement;
-    }
   }
   else {
-    return truePathBlock;
+    ifStatement = truePathBlock;
+  }
+
+  if (options.embedded) {
+    //return self_calling_wrapper_statement({ content: ifStatement });
+    return block_statement({
+      openBlock: token_statement({ token: '(function () {' }),
+      statements: [ ifStatement ],
+      closeBlock: token_statement({ token: '}())' })
+    });
+  } else {
+    return ifStatement;
   }
 }
 
