@@ -68,9 +68,15 @@ function if_block([operator, conditional, truePath, falsePath], options) {
       closeBlock: token_statement({ token: '}' })
     });
 
-    return multi_line_statement({
+    const ifStatement = multi_line_statement({
       statements: [ truePathBlock, falsePathBlock ]
     });
+
+    if (options.embedded) {
+      return self_calling_wrapper_statement(ifStatement);
+    } else {
+      return ifStatement;
+    }
   }
   else {
     return truePathBlock;
