@@ -79,12 +79,7 @@ function if_block([operator, conditional, truePath, falsePath], options) {
   }
 
   if (options.embedded) {
-    //return self_calling_wrapper_statement({ content: ifStatement });
-    return block_statement({
-      openBlock: token_statement({ token: '(function () {' }),
-      statements: [ ifStatement ],
-      closeBlock: token_statement({ token: '}())' })
-    });
+    return self_calling_wrapper_statement({ content: ifStatement });
   } else {
     return ifStatement;
   }

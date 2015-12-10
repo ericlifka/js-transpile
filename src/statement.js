@@ -114,12 +114,14 @@ export function function_statement({ openStatement, parameters, closeStatement, 
   };
 }
 
-export function self_calling_wrapper_statement({ content, terminate }) {
+export function self_calling_wrapper_statement({ content, terminate, returnStatement }) {
   return block_statement({
-    openBlock: '(function () {',
+    openBlock: token_statement({ token: 'function () {' }),
     statements: [ content ],
-    closeBlock: '}())',
-    terminate
+    closeBlock: token_statement({ token: '}()' }),
+    embedded: true,
+    terminate,
+    returnStatement
   });
 }
 /*
