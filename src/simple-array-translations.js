@@ -94,6 +94,14 @@ function cond_block([operator, ...branches], options) {
   return empty_statement();
 }
 
+function while_block([operator, ...statements], options) {
+  return empty_statement();
+}
+
+function for_block([operator, ...statements], options) {
+  return empty_statement();
+}
+
 function math_operator([operator, ...params], options) {
   return infix_statement(merge(options, {
     statements: params.map(param => toJsTree(param, { embedded: true })),
@@ -224,6 +232,8 @@ export const toJsTree = function (arr, options = { }) {
     case 'let': return let_to_var(arr, options);
     case 'if': return if_block(arr, options);
     case 'cond': return cond_block(arr, options);
+    case 'for': return for_block(arr, options);
+    case 'while': return while_block(arr, options);
 
     case '+': return math_operator(arr, options);
     case '-': return math_operator(arr, options);
