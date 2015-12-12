@@ -88,8 +88,23 @@ describe('transform', () => {
         `,
         `var a = (function () {if (b === 4) {return 5;} else {return 6;}}());`);
     });
+
     describe('for loops', () => {});
-    describe('while loops', () => {});
+
+    describe('while loops', () => {
+      test(`
+        (while (> a 5)
+          (print a))
+        `,
+        `while (a > 5) {console.log(a);}`);
+      test(`
+        (let a 5)
+        (while (> a 0)
+          (print a)
+          (set a (- a 1)))
+        `,
+        `var a = 5; while (a > 0) {console.log(a); a = a - 1;}`);
+    });
   });
 
   describe('function literals', () => {
